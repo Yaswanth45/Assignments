@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -6,20 +7,60 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private firstNumber:number=null;
-  private secondNumber:number=null;
-  private result:number=null;
+  private message:string =null;
+  private version:number=null;
+  private ind:number=null;
+  private topics:string[]=null;
 
-  public getAdd(){
-    this.result=this.firstNumber+this.secondNumber;
+  public constructor(){
+    this.message="Assignment Page";
+    this.version=8;
+    this.topics=['Data Binding','Forms','http','Routing'];
   }
-  public getSub(){
-    this.result=this.firstNumber-this.secondNumber;
+
+  public addTopic(currentTopic:string):boolean{
+    if(currentTopic.length==0){
+      alert(`Required Field`);
+      return false;
+    }
+    for(var topic of this.topics)
+    {
+        if(currentTopic==topic)
+        {
+          alert(`Duplicate value...! Enter new value`);
+          return false;
+        }
+     }
+     this.topics.push(currentTopic);
   }
-  public getMul(){
-    this.result=this.firstNumber*this.secondNumber;
+  public deleteTopic(idx:number):void{
+    alert('Do you want to delete');
+    this.topics.splice(idx,1);
   }
-  public getDiv(){
-    this.result=this.firstNumber/this.secondNumber;
+  public deleteTopics(currentTopic:string):void{
+    alert('Do you want to delete');
+    for(var topic of this.topics)
+    {
+        if(currentTopic==topic){
+          this.ind =this.topics.indexOf(currentTopic);
+          this.topics.splice(this.ind,1);
+        }
+    }
+  }
+  public searchTopic(currentTopic:string):void{
+    for(var topic of this.topics){
+      if(currentTopic==topic){
+        this.ind =this.topics.indexOf(currentTopic);
+        alert(`Element Found at`+" "+(this.ind+1));
+      }
+    }
+  }
+
+  public editTopic(idx:number){
+    this.topics=#currentTopic;
+  }
+
+  public updateTopic(currentTopic){
+
   }
 }
